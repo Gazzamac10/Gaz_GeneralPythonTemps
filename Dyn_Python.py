@@ -100,3 +100,30 @@ for c in categories:
         internal_cat.append(Revit.Elements.Category.ById(c.Id.IntegerValue))
 
 OUT = model_cat, anno_cat, ana_cat, internal_cat
+
+
+"""Collect All elements in Model"""
+userCategories = doc.Settings.Categories
+# extract workset's name and ids
+ids = []
+for i in userCategories:
+    try:
+        ids.append(i.Id.IntegerValue)
+    except:
+        ids.append(0)
+# Assign your output to the OUT variable
+builtInNames = []
+for x in ids:
+    try:
+        builtInNames.append(System.Enum.ToObject(BuiltInCategory, x))
+    except:
+        pass
+
+listed = []
+for z in builtInNames:
+    try:
+        listed.append(FilteredElementCollector(doc).WhereElementIsNotElementType().OfCategory(z).ToElements())
+    except:
+        pass
+
+OUT = listed, builtInNames
