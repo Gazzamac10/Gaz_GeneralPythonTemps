@@ -27,4 +27,4 @@ test = [createlist(pathandfolder[i],lista[i])for i in range(len(lista))]
 listofdrawings = [item for sublist in test for item in sublist]
 
 for item in lista:
-    print item
+    print len(item)
