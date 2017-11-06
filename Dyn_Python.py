@@ -127,3 +127,6 @@ for z in builtInNames:
         pass
 
 OUT = listed, builtInNames
+
+"""set parameter by name"""
+OUT = [item.SetParameterByName("Cross-Section Rotation",45)for item in x]

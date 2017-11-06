@@ -10,5 +10,5 @@ for item in os.listdir(path):
     list2.append(path+"MFSIII-ACM-00-XX-DR-SE-"+item)
 
 
-for i in range(len(list1)):
-    os.renames(list1[i],list2[i])
+"""for i in range(len(list1)):
+    os.renames(list1[i],list2[i])"""
