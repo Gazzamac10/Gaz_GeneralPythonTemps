@@ -130,3 +130,11 @@ OUT = listed, builtInNames
 
 """set parameter by name"""
 OUT = [item.SetParameterByName("Cross-Section Rotation",45)for item in x]
+
+x = IN[0]
+
+element = x
+
+OUT = x.GetParameterValueByName("Mark")
+
+element.SetParameterByName
