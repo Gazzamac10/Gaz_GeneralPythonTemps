@@ -79,3 +79,45 @@ f = open(Path,"w")
 for item in fileout:
     f.write("%s\n" % item)
 f.close()
+
+
+"""find duplicate points"""
+
+import rhinoscriptsyntax as rs
+import scriptcontext
+import copy
+
+if not tol:
+    tol = scriptcontext.doc.ModelAbsoluteTolerance
+
+
+def removeDuplicates(points):
+    # Create a dictionary to keep track of the Id
+    pointDict = {}
+    ptList = []
+    for pt in points:
+        pt3d = rs.coerce3dpoint(pt)
+        pointDict[pt3d] = pt
+        ptList.append(pt3d)
+
+    # sortList
+    ptList.sort()
+    ptLast = ptList[-1]
+
+    for i in range(len(ptList) - 2, -1, -1):
+        if (abs(ptList[i][0] - ptLast[0]) < tol) and (abs(ptList[i][1] - ptLast[1])) < tol and (
+            abs(ptList[i][2] - ptLast[2]) < tol):
+            del ptList[i]
+        else:
+            ptLast = ptList[i]
+
+    # find the the ids with the new list
+    outputList = []
+    for pt in ptList:
+        ptId = pointDict[pt]
+        outputList.append(ptId)
+
+    return outputList
+
+
+a = removeDuplicates(points)

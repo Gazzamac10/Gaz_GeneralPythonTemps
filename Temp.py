@@ -18,7 +18,12 @@ path = "C:\\temp\Gazza\MFS\DWG"
 
 folders = os.listdir(path)
 
-for item in folders:
+"""for item in folders:
     print len(os.listdir(path +"\\"+item))
-    print os.listdir(path +"\\"+item)
+    print os.listdir(path +"\\"+item)"""
 
+
+list = ["12","6","2"]
+
+for item in list:
+    print list.index("6")
