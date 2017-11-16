@@ -65,3 +65,44 @@ with open(filename) as f:
 
 with open(filename, "w") as f:
     f.write(file_str)
+
+
+
+#Sort points by y then x#
+list1 = y
+list2 = x
+
+values = sorted(set(map(lambda x: x, list1)))
+
+
+def getitemsinlist1(string, list1, list2):
+	lista = []
+	for i in range(len(list1)):
+		if list1[i] == string:
+			lista.append(list1[i])
+	return lista
+
+
+def getitemsinlist2(string, list1, list2):
+	lista = []
+	for i in range(len(list1)):
+		if list1[i] == string:
+			lista.append(list2[i])
+	return lista
+
+
+def getitemsinlist3(string, list1, list2):
+	lista = []
+	for i in range(len(list1)):
+		if list1[i] == string:
+			lista.append(list2[i])
+	return lista
+
+
+ygroup = [getitemsinlist1(values[i], y, x) for i in range(len(values))]
+xgroup = [getitemsinlist2(values[i], y, x) for i in range(len(values))]
+pgroup = [getitemsinlist2(values[i], y, z) for i in range(len(values))]
+
+a = ygroup[2]
+b = xgroup[2]
+OUT = pgroup[2]
