@@ -69,10 +69,13 @@ with open(filename, "w") as f:
 
 
 #Sort points by y then x#
-list1 = y
-list2 = x
+list1 = IN[0]
+list2 = IN[1]
+list3 = IN[2]
 
-values = sorted(set(map(lambda x: x, list1)))
+v = [round(item, 2) for item in list1]
+
+values = sorted(set(map(lambda x: x, v)))
 
 
 def getitemsinlist1(string, list1, list2):
@@ -99,10 +102,8 @@ def getitemsinlist3(string, list1, list2):
 	return lista
 
 
-ygroup = [getitemsinlist1(values[i], y, x) for i in range(len(values))]
-xgroup = [getitemsinlist2(values[i], y, x) for i in range(len(values))]
-pgroup = [getitemsinlist2(values[i], y, z) for i in range(len(values))]
+ygroup = [getitemsinlist1(values[i], v, list2) for i in range(len(values))]
+xgroup = [getitemsinlist2(values[i], v, list2) for i in range(len(values))]
+pgroup = [getitemsinlist2(values[i], v, list3) for i in range(len(values))]
 
-a = ygroup[2]
-b = xgroup[2]
-OUT = pgroup[2]
+OUT = ygroup, xgroup, pgroup
