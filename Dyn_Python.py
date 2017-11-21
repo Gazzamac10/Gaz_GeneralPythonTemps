@@ -138,3 +138,16 @@ element = x
 OUT = x.GetParameterValueByName("Mark")
 
 element.SetParameterByName
+
+"""to set a new location line for framing"""
+x = IN[0]
+
+t= [item.Location for item in x]
+
+o = [item.Offset(500)for item in t]
+
+r = []
+for i in range(len(x)):
+	r.append(x[i].SetLocation(o[i]))
+
+OUT = r
