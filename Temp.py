@@ -14,26 +14,21 @@ import os
 
 
 
-path = "P:\UKLON06-BE-Structural\Projects\_all\!Annual Leave"
+path = "P:\UKLON06-BE-Structural\Projects\Structures - Kapps\BIM" \
+
 
 folders = os.listdir(path)
 
-"""for item in folders:
-    print len(os.listdir(path +"\\"+item))
-    print os.listdir(path +"\\"+item)"""
 
 
-test = [folders[0]]
-
-
-for dirs in os.walk(path):
-    print dirs
-
-
-
-
-
-"""for root, dirs, files in os.walk(path):
+list1 = []
+for root, dirs, files in os.walk(path):
     for name in files:
-        if "TestingGazGazgaz.txt" ==  name:
-            print name"""
+        if ".rte" in  name:
+            list1.append(name)
+
+list2 = [item for item in set(list1)]
+
+for item in list2:
+    print item
+
