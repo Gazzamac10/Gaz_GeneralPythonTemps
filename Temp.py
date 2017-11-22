@@ -14,7 +14,7 @@ import os
 
 
 
-path = "C:\\temp"
+path = "P:\UKLON06-BE-Structural\Projects\_all\!Annual Leave"
 
 folders = os.listdir(path)
 
@@ -25,7 +25,15 @@ folders = os.listdir(path)
 
 test = [folders[0]]
 
-for root, dirs, files in os.walk(path):
+
+for dirs in os.walk(path):
+    print dirs
+
+
+
+
+
+"""for root, dirs, files in os.walk(path):
     for name in files:
-        if "fbx" in name:
-            print name
+        if "TestingGazGazgaz.txt" ==  name:
+            print name"""
