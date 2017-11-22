@@ -14,7 +14,7 @@ import os
 
 
 
-path = "C:\\temp\Gazza\MFS\DWG"
+path = "C:\\temp"
 
 folders = os.listdir(path)
 
@@ -23,7 +23,9 @@ folders = os.listdir(path)
     print os.listdir(path +"\\"+item)"""
 
 
-list = ["12","6","2"]
+test = [folders[0]]
 
-for item in list:
-    print list.index("6")
+for root, dirs, files in os.walk(path):
+    for name in files:
+        if "fbx" in name:
+            print name
