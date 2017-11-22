@@ -151,3 +151,8 @@ for i in range(len(x)):
 	r.append(x[i].SetLocation(o[i]))
 
 OUT = r
+
+#Get type Parameter#
+t = [item.Type for item in x]
+
+OUT = item.GetParameterValueByName("Width")
