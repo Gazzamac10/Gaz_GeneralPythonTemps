@@ -61,7 +61,7 @@ def del_and_update():
 
 
 
-del_and_update()
+#del_and_update()
 
 
 # create_table()

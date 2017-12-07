@@ -107,3 +107,10 @@ xgroup = [getitemsinlist2(values[i], v, list2) for i in range(len(values))]
 pgroup = [getitemsinlist2(values[i], v, list3) for i in range(len(values))]
 
 OUT = ygroup, xgroup, pgroup
+
+
+#sort list by Key list#
+X = [1,3,2,4,6,7,5,3]
+Y = [9,6,5,4,3,4,5,6]
+
+t = [x for y, x in sorted(zip(X, Y))]
