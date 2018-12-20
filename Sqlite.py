@@ -30,7 +30,6 @@ def dynamic_data_entry():
     conn.commit()
 
 
-
 def read_from_db():
     c.execute("SELECT * FROM stufftoplot WHERE value > 2")
     for row in c.fetchall():
