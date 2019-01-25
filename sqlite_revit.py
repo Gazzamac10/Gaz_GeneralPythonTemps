@@ -29,6 +29,7 @@ def dynamic_data_entry():
 for i in range(0,30):
     dynamic_data_entry()
 
+
 c.close()
 conn.close()
 
