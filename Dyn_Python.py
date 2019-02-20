@@ -150,9 +150,110 @@ r = []
 for i in range(len(x)):
 	r.append(x[i].SetLocation(o[i]))
 
+endpoint = item.EndPoint.X for item in ?
+
 OUT = r
 
 #Get type Parameter#
 t = [item.Type for item in x]
 
 OUT = item.GetParameterValueByName("Width")
+
+UnwrapElement
+
+#if Mrk contains#
+x = IN[0]
+
+Marks = [item.GetParameterValueByName("Mark")for item in x]
+
+wing = []
+for i in range(len(x)):
+	if "WG" in Marks[i]:
+		wing.append(x[i])
+
+OUT = wing
+
+
+#open detach and saveas revit files
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# Import DocumentManager and TransactionManager
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+if isinstance(IN[0], list):
+	files = IN[0]
+else:
+	files = [IN[0]]
+
+
+
+options = OpenOptions()
+options.DetachFromCentralOption = DetachFromCentralOption.DetachAndPreserveWorksets
+
+worksharingOptions = WorksharingSaveAsOptions()
+worksharingOptions.SaveAsCentral = True
+
+SaveOptions = SaveAsOptions()
+SaveOptions.SetWorksharingOptions(worksharingOptions)
+
+for file in files:
+	modelpath = FilePath(file)
+	newdoc = app.OpenDocumentFile(modelpath,options)
+	newfile = file[:-4] + "detached" + ".rvt"
+	newdoc.SaveAs(newfile,SaveOptions)
+	newdoc.Close(False)
+
+OUT = 0
+#open detach and saveas revit files
+
+
+#to get elements as part od a truss
+UnwrapElement(IN[0]).Members
+
+
+#swtich current view
+import clr
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uidoc = DocumentManager.Instance.CurrentUIDocument
+
+TransactionManager.Instance.EnsureInTransaction(doc)
+TransactionManager.Instance.ForceCloseTransaction()
+
+view = UnwrapElement(IN[0])
+uidoc.RequestViewChange( view )
+#switch current view
+
+#make column slanted#
+OUT = [item.SetParameterByName("Column Style",1)for item in ele]
+
+
+
+#Make input a list
+def makelist(input):
+	if isinstance(input, list):
+		files = input
+	else:
+		files = [input]
