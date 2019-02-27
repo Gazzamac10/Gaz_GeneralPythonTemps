@@ -257,3 +257,63 @@ def makelist(input):
 		files = input
 	else:
 		files = [input]
+
+
+#HIDE-ELEMENTS IN VIEW
+import clr
+
+# Import Element wrapper extension methods
+clr.AddReference("RevitNodes")
+import Revit
+
+clr.ImportExtensions(Revit.Elements)
+# Import DocumentManager and TransactionManager
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+import System
+from System.Collections.Generic import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+
+
+def makelist(input):
+    if isinstance(input, list):
+        out = input
+    else:
+        out = [input]
+    return out
+
+
+e = makelist(UnwrapElement(IN[0]))
+v = makelist(UnwrapElement(IN[1]))
+
+
+def hideElements(elements, views):
+    TransactionManager.Instance.EnsureInTransaction(doc)
+
+    v = list()
+    cnt = 0
+
+    while cnt < len(views):
+        v = views[cnt]
+        ids = List[ElementId]()
+        for i in elements[cnt]:
+            if not i.IsHidden(v) and i.CanBeHidden(v):
+                ids.Add(i.Id)
+        v.HideElements(ids)
+        cnt = cnt + 1
+
+    TransactionManager.Instance.TransactionTaskDone()
+
+    return views, elements
+
+
+OUT = hideElements(e, v)
+#HIDE-ELEMENTS IN VIEW
